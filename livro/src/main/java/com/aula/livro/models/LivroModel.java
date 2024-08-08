@@ -23,4 +23,5 @@ public class LivroModel implements Serializable {
     private UUID id;
     private String name;
     private String author;
+    private String genre;
 }
