@@ -22,12 +22,13 @@ public class LivroController {
     LivroRepository livroRepository;
 
     @GetMapping
-    public ResponseEntity<List<LivroModel>> getAllLivrosByGenre(@RequestParam(required = false) String genre) {
-        if (genre == null){
-            return ResponseEntity.status(HttpStatus.OK).body(livroRepository.findAll());
-        }
+    public ResponseEntity<List<LivroModel>> getAllLivros() {
+        return ResponseEntity.status(HttpStatus.OK).body(livroRepository.findAll());
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(livroRepository.findAllByGenre("Drama"));
+    @GetMapping("genres/{genre}")
+    public ResponseEntity<List<LivroModel>> getAllLivrosByGenre(@PathVariable(value = "genre") String genre) {
+        return ResponseEntity.status(HttpStatus.OK).body(livroRepository.findAllByGenre(genre));
     }
 
     @GetMapping("/{id}")

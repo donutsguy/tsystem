@@ -1,4 +1,4 @@
-package com.example.aula.primeiroprojeto.models;
+package com.example.viagens.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,26 +6,25 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.UUID;
+import java.util.List;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product")
+@Table(name = "destino")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductModel implements Serializable {
+public class DestinoModel implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private String name;
-    private BigDecimal value;
+    private String pais;
 
     @JsonIgnore
-    @ManyToOne
-    private CategoryModel category;
+    @OneToMany(mappedBy = "destino")
+    private List<ViagemModel> viagens;
 }

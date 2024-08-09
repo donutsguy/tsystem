@@ -1,31 +1,28 @@
 package com.example.aula.primeiroprojeto.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 import java.util.UUID;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product")
+@Table(name = "category")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductModel implements Serializable {
+public class CategoryModel implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    private BigDecimal value;
-
-    @JsonIgnore
-    @ManyToOne
-    private CategoryModel category;
+    @OneToMany(mappedBy = "category")
+    private List<ProductModel> products;
 }
